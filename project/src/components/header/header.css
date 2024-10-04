@@ -1,0 +1,80 @@
+header {
+  width: 100vw;
+}
+
+nav {
+  width: calc(100vw - 32px);
+  margin: 16px 16px 16px 16px;
+  position: relative;
+}
+@media screen and (min-width: 768px) {
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100vw - 72px);
+    margin: 24px 36px 24px 36px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  nav {
+    width: 1280px;
+    margin: 24px auto;
+  }
+}
+
+.nav__form {
+  width: 100%;
+  margin: 0;
+  margin: 16px 0 16px 0;
+}
+@media screen and (min-width: 768px) {
+  .nav__form {
+    margin: 0 16px 0 0;
+  }
+}
+
+.nav__form_avatar {
+  display: flex;
+  align-items: center;
+}
+
+.nav__avatar {
+  margin: 0 0 0 16px;
+}
+@media screen and (min-width: 768px) {
+  .nav__avatar {
+    margin: 0 0 0 24px;
+    position: absolute;
+    right: 48px;
+  }
+}
+@media screen and (min-width: 768px) and (min-width: 1280px) {
+  .nav__avatar {
+    left: 1200px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .nav__right {
+    display: flex;
+    margin: 0 100px 0 0;
+  }
+}
+@media screen and (min-width: 768px) and (min-width: 1280px) {
+  .nav__right {
+    margin: 0 150px 0 0;
+  }
+}
+
+.search__form {
+  padding: 0 0 0 40px;
+  height: 36px;
+  width: calc(100% - 40px);
+}
+@media screen and (min-width: 768px) {
+  .search__form {
+    width: 240px;
+    height: 40px;
+  }
+}/*# sourceMappingURL=header.css.map */

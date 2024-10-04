@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import Header from "./components/header/Header";
+import Hero from "./components/hero/Hero";
+import Information from "./components/information/Information"; 
+import Comments from "./components/comments/Comments";
+import List from "./components/list/List";
+
+import './styles/global.css';
+import './styles/app.css';
+
+import videoData from './data/video-details.json'; 
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const videos = videoData;
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Header />
+      <Hero video={videos[0].video} image={videos[0].image} />
+      <div className="bottom__container">
+        <div className="left__container">
+          <Information 
+            title={videos[0].title} 
+            channel={videos[0].channel} 
+            date={videos[0].timestamp} 
+            description={videos[0].description} 
+            views={videos[0].views} 
+            likes={videos[0].likes} 
+          />
+          <Comments comments={videos[0].comments} />
+        </div>
+        <div className="right__container">
+          <List videos={videos} /> 
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
