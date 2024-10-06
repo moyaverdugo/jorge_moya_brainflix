@@ -22,11 +22,11 @@ const Header = () => {
                             <input className="search__form form" type="text" name="search" id="search" placeholder="Search"/>
                         </div>
                     </div>
-                    <img class="nav__avatar avatar" src={photo} alt="converation photo" />
+                    <img className="nav__avatar avatar" src={photo} alt="converation photo" />
                 </div>
-                <button class="button__container" type="submit">
+                <button className="button__container" type="submit">
                     <img src={uploadIcon} alt="Upload Icon" className="button__icon" />
-                    <h5 class="button__text">UPLOAD</h5>
+                    <h5 className="button__text">UPLOAD</h5>
                 </button>
             </div>
         </nav>

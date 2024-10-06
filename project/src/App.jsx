@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import Header from "./components/header/Header";
 import Hero from "./components/hero/Hero";
@@ -10,28 +11,36 @@ import './styles/app.css';
 
 import videoData from './data/video-details.json'; 
 
-
 function App() {
-  const videos = videoData;
+
+  const [currentVideo, setCurrentVideo] = useState(videoData[0]);
+  const [videoList, setVideoList] = useState(videoData.slice(1));
+
+  const handleVideoSelection = (selectedVideo) => {
+    console.log(selectedVideo);
+    const updatedVideoList = [currentVideo, ...videoList.filter(video => video.id !== selectedVideo.id)];
+    setCurrentVideo(selectedVideo);
+    setVideoList(updatedVideoList);
+  };
 
   return (
     <>
       <Header />
-      <Hero video={videos[0].video} image={videos[0].image} />
+      <Hero video={currentVideo.video} image={currentVideo.image} />
       <div className="bottom__container">
         <div className="left__container">
           <Information 
-            title={videos[0].title} 
-            channel={videos[0].channel} 
-            date={videos[0].timestamp} 
-            description={videos[0].description} 
-            views={videos[0].views} 
-            likes={videos[0].likes} 
+            title={currentVideo.title} 
+            channel={currentVideo.channel} 
+            date={currentVideo.timestamp} 
+            description={currentVideo.description} 
+            views={currentVideo.views} 
+            likes={currentVideo.likes} 
           />
-          <Comments comments={videos[0].comments} />
+          <Comments comments={currentVideo.comments} />
         </div>
         <div className="right__container">
-          <List videos={videos} /> 
+          <List videos={videoList} onVideoSelect={handleVideoSelection} />
         </div>
       </div>
     </>

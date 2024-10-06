@@ -20,16 +20,16 @@ const Information = ({ title, channel, date, description, views, likes }) => {
                     <div className="information__channel">
                         <h2>By {channel}</h2>
                     </div>
-                    <p class="silver__font">{formattedDate}</p>
+                    <p className="silver__font">{formattedDate}</p>
                 </div>
                 <div className="information__details_right">
                     <div className="information__views">
                     <img src={viewsIcon} className="information__views_icon" alt="Views Icon" /> 
-                    <p class="silver__font">{views}</p>
+                    <p className="silver__font">{views}</p>
                     </div>
                     <div className="information__likes">
                     <img src={likesIcon} className="information__likes_icon"alt="Likes Icon" /> 
-                    <p class="silver__font">{likes}</p>
+                    <p className="silver__font">{likes}</p>
                     </div>
                 </div>
             </div>
