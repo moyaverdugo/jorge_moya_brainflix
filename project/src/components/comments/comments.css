@@ -1,10 +1,10 @@
 .comments__container {
-  width: calc(100vw - 32px);
+  width: calc(100% - 32px);
   margin: 0 16px 16px 16px;
 }
 @media screen and (min-width: 768px) {
   .comments__container {
-    width: calc(100vw - 72px);
+    width: calc(100% - 72px);
     margin: 0 36px 24px 36px;
   }
 }
@@ -48,7 +48,7 @@
 
 .conversation__form {
   height: 108px;
-  width: 100%;
+  width: calc(100% - 12px);
   padding-left: 12px;
   text-align: left;
   margin-bottom: 16px;

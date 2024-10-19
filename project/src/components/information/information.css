@@ -1,11 +1,11 @@
 .information {
   text-align: left;
-  width: calc(100vw - 32px);
+  width: calc(100% - 32px);
   margin: 16px 16px 0 16px;
 }
 @media screen and (min-width: 768px) {
   .information {
-    width: calc(100vw - 72px);
+    width: calc(100% - 72px);
     margin: 24px 36px 0 36px;
   }
 }

@@ -2,11 +2,12 @@
 @import '../../styles/_mixins.scss';
 
 header{
-    width:100vw;
+    width:100%;
 }
 
 nav {
-    width: calc(100vw - 16px * 2);
+
+    width: calc(100% - 16px * 2);
     margin: 16px 16px 16px 16px;
     position:relative;
     @include tablet {
@@ -41,7 +42,7 @@ nav {
     @include tablet {
         margin: 0 0 0 24px;
         position:absolute;
-        right:48px;
+        right:24px;
         @include desktop {
             left: 1200px;
         }
@@ -68,5 +69,13 @@ nav {
     }
 }
 
+.nav__link {
+    text-decoration: none; 
+}
+
+.nav__left{
+    text-align:center;
+}
+  
 
 

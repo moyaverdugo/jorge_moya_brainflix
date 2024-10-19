@@ -3,11 +3,11 @@
 
 .information{
     text-align:left;
-    width: calc(100vw - 16px * 2);
+    width: calc(100% - 16px * 2);
     margin: 16px 16px 0 16px;
 
     @include tablet {
-        width: calc(100vw - 36px * 2);
+        width: calc(100% - 36px * 2);
         margin: 24px 36px 0 36px;
         
     }

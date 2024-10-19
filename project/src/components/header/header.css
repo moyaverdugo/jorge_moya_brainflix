@@ -1,9 +1,9 @@
 header {
-  width: 100vw;
+  width: 100%;
 }
 
 nav {
-  width: calc(100vw - 32px);
+  width: calc(100% - 32px);
   margin: 16px 16px 16px 16px;
   position: relative;
 }
@@ -46,7 +46,7 @@ nav {
   .nav__avatar {
     margin: 0 0 0 24px;
     position: absolute;
-    right: 48px;
+    right: 24px;
   }
 }
 @media screen and (min-width: 768px) and (min-width: 1280px) {
@@ -77,4 +77,12 @@ nav {
     width: 240px;
     height: 40px;
   }
+}
+
+.nav__link {
+  text-decoration: none;
+}
+
+.nav__left {
+  text-align: center;
 }/*# sourceMappingURL=header.css.map */

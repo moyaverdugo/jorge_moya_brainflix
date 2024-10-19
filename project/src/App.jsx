@@ -1,49 +1,109 @@
-import { useState } from 'react';
-import './App.css';
-import Header from "./components/header/Header";
-import Hero from "./components/hero/Hero";
-import Information from "./components/information/Information"; 
-import Comments from "./components/comments/Comments";
-import List from "./components/list/List";
-
+import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import UploadPage from "./components/uploadPage/UploadPage";  
+import Video from "./components/video/Video";  
+import NotFoundPage from "./components/notFoundPage/NotFoundPage";  
+import axios from 'axios';
 import './styles/global.css';
-import './styles/app.css';
 
-import videoData from './data/video-details.json'; 
+// Class to manage the API -----------------------------------------------------------------------------------
+class ClassApi {
+  constructor(apiKey) {
+    this.apiKey = apiKey;
+    this.baseUrl = 'https://unit-3-project-api-0a5620414506.herokuapp.com';
+  }
 
+  async getVideos() {
+    try {
+      const response = await axios.get(`${this.baseUrl}/videos?api_key=${this.apiKey}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching video list:', error);
+      return [];
+    }
+  }
+
+  async getVideoDetails(videoId) {
+    try {
+      const response = await axios.get(`${this.baseUrl}/videos/${videoId}?api_key=${this.apiKey}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching video details:', error);
+      return null;
+    }
+  }
+}
+
+// Function to get the API KEY ----------------------------------------------------------------------------------
+const getApiKey = async () => {
+  try {
+    const response = await axios.get('https://unit-3-project-api-0a5620414506.herokuapp.com/register');
+    return response.data;
+  } catch (error) {
+    console.error('Error registering API key:', error);
+  }
+};
+
+// App functionality ----------------------------------------------------------------------------------
 function App() {
+  // Declaring my variables ---------------------------------
+  const [defaultVideo, setDefaultVideo] = useState(null);// Default video that will show on the home page
+  const [videoList, setVideoList] = useState([]);
+  const [loading, setLoading] = useState(true);// Loading to avoid rendering incomplete data
+  const [api, setApi] = useState(null); 
+  
+  // Controlling the API execution with use ---------------------------------
+  useEffect(() => {
+    const fetchApiData = async () => {
+      const apiKey = await getApiKey(); 
+      const classApi = new ClassApi(apiKey); // Creating the class 
+      setApi(classApi); // Assigning it to the api variable
 
-  const [currentVideo, setCurrentVideo] = useState(videoData[0]);
-  const [videoList, setVideoList] = useState(videoData.slice(1));
+      const videos = await classApi.getVideos(); // Pulling the videos
+      setVideoList(videos); // Assigning them to the videoList variable
 
-  const handleVideoSelection = (selectedVideo) => {
-    console.log(selectedVideo);
-    const updatedVideoList = [currentVideo, ...videoList.filter(video => video.id !== selectedVideo.id)];
-    setCurrentVideo(selectedVideo);
-    setVideoList(updatedVideoList);
-  };
+      if (videos.length > 0) { // Initial default video
+        const initialVideo = await classApi.getVideoDetails(videos[0].id);
+        setDefaultVideo(initialVideo);
+      }
 
+      setLoading(false);
+    };
+
+    fetchApiData();
+  }, []);
+  
+  // Adding a loading message ---------------------------------
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
+  // App architecture ---------------------------------
   return (
-    <>
-      <Header />
-      <Hero video={currentVideo.video} image={currentVideo.image} />
-      <div className="bottom__container">
-        <div className="left__container">
-          <Information 
-            title={currentVideo.title} 
-            channel={currentVideo.channel} 
-            date={currentVideo.timestamp} 
-            description={currentVideo.description} 
-            views={currentVideo.views} 
-            likes={currentVideo.likes} 
-          />
-          <Comments comments={currentVideo.comments} />
-        </div>
-        <div className="right__container">
-          <List videos={videoList} onVideoSelect={handleVideoSelection} />
-        </div>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route 
+          path="/" 
+          element={<Video 
+            defaultVideo={defaultVideo} 
+            videoList={videoList} 
+          />} 
+        />
+        <Route 
+          path="/upload" 
+          element={<UploadPage />} 
+        />
+        <Route 
+          path="/video/:videoId" 
+          element={<Video 
+                     videoList={videoList} 
+                     api={api} />} 
+        />
+        <Route 
+          path="*" 
+          element={<NotFoundPage />} 
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
