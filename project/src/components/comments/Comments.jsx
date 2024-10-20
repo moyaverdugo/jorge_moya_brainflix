@@ -3,6 +3,9 @@ import add_commentIcon from '../../assets/icons/add_comment.svg';
 import photo from '../../assets/images/Mohan-muruge.jpg';
 
 const Comments = ({ comments }) => {
+    const handleCommentSubmit = async (event) => {
+    event.preventDefault();
+    };
     return (
         <div className="comments__container">
             <div className="comments__title">
@@ -10,7 +13,7 @@ const Comments = ({ comments }) => {
             </div>
             <div className="conversation__container">
                 <img className="conversation__avatar avatar" src={photo} alt="converation photo" />
-                <form className="conversation__sub_container">
+                <form className="conversation__sub_container" onSubmit={handleCommentSubmit}>
                         <div className="conversation__form_container">
                             <label className="conversation__title">
                                 <h4 className="silver__font">JOIN THE CONVERSATION</h4>
