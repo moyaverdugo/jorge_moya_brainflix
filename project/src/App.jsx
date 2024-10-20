@@ -32,6 +32,18 @@ class ClassApi {
       return null;
     }
   }
+
+  async postComment(videoId, commentText) {
+    try {
+      const response = await this.api.post(`/videos/${videoId}/comments`, {
+        comment: commentText,
+      });
+      return response.data; // Return the newly added comment
+    } catch (error) {
+      console.error('Error posting comment:', error);
+      throw error;
+    }
+  }
 }
 
 // Function to get the API KEY ----------------------------------------------------------------------------------

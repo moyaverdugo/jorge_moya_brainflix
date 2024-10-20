@@ -4,7 +4,7 @@ import photo from '../../assets/images/Mohan-muruge.jpg';
 
 const Comments = ({ comments }) => {
     const handleCommentSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Ensure the page does not refresh when submitting comment
     };
     return (
         <div className="comments__container">
