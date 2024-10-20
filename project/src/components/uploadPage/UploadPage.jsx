@@ -40,7 +40,7 @@ function UploadPage() {
               <img src={uploadIcon} alt="Upload Icon" className="button__icon" />
               <h5 className="button__text">PUBLISH</h5>
           </button>
-          <button className="button__container button__cancel" type="button">
+          <button className="button__cancel" type="button">
               <h5 className="button__cancel_text">CANCEL</h5>
           </button>
         </div>

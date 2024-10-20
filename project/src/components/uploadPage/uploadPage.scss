@@ -36,6 +36,12 @@ header{
     margin: 16px 0 16px 0;
     width: 100%;
     border-radius: 4px;
+    @include tablet {
+        width: 50%;
+    }
+    @include desktop {
+        width: 100%;
+    }
 }
 
 
@@ -74,6 +80,12 @@ header{
     @include tablet {
         margin: 0 36px 0 0;
     }
+    
+}
+
+.button__cancel:hover{
+    background-color: $mercury;
+    border:none;
 }
 
 .button__cancel_text{
@@ -99,13 +111,13 @@ header{
 
 .upload__video{
     @include desktop {
-        width:75%;
+        width:77%;
     }
 }
 
 .upload__img_container{
     @include desktop {
-        width:25%;
+        width:23%;
         margin: 0 24px 0 0;
     } 
 }
