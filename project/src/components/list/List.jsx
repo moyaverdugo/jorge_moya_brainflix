@@ -1,4 +1,4 @@
-import './list.css';
+import './list.scss';
 
 const List = ({ videos, onVideoSelect }) => {
     return (

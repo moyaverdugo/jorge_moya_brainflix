@@ -1,4 +1,4 @@
-import './hero.css';
+import './hero.scss';
 
 const Hero = ({ video, image }) => {
     if (!video) {

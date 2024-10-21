@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from "../header/Header";
-import './uploadPage.css';
+import './uploadPage.scss';
 import heroImage from '../../assets/images/Upload-video-preview.jpg'
 import uploadIcon from '../../assets/icons/upload.svg'
 

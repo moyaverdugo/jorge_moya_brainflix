@@ -1,4 +1,4 @@
-import './comments.css'; 
+import './comments.scss'; 
 import add_commentIcon from '../../assets/icons/add_comment.svg';
 import photo from '../../assets/images/Mohan-muruge.jpg';
 
@@ -31,12 +31,8 @@ const Comments = ({ comments }) => {
             {comments.map(comment => (
                 <div key={comment.id} className="comment__container">
                     <img className="conversation__avatar avatar" 
-                    //In the scenario that the comments actually come with an image//
-                    //how can I create a functionality that show the image that comes with the comment//
-                    //otherwise, show a default empty image?//
-                    src="https://via.placeholder.com/150/e1e1e1/e1e1e1.jpg" alt="converation photo"
-                    
-                    />
+                    src={comment.imageUrl ?? "https://via.placeholder.com/150/e1e1e1/e1e1e1.jpg"}
+                     alt="converation photo"/>
                     <div className="comment">
                         <h3 className="comment-name">{comment.name}</h3>
                         <p className="comment-text">{comment.comment}</p>

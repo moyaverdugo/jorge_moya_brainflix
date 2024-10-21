@@ -4,7 +4,7 @@ import UploadPage from "./components/uploadPage/UploadPage";
 import Video from "./components/video/Video";  
 import NotFoundPage from "./components/notFoundPage/NotFoundPage";  
 import axios from 'axios';
-import './styles/global.css';
+import './styles/global.scss';
 
 // Class to manage the API -----------------------------------------------------------------------------------
 class ClassApi {

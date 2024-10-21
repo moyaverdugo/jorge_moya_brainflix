@@ -5,12 +5,12 @@ import Hero from "../hero/Hero";
 import Information from "../information/Information";
 import Comments from "../comments/Comments";
 import List from "../list/List";
-import './video.css';
+import './video.scss';
 
 function Video({ videoList, api, defaultVideo }) { 
   const { videoId } = useParams(); // Capturing the videoId from the url
   const navigate = useNavigate();
-  const [currentVideo, setCurrentVideo] = useState(defaultVideo || null);// Either use it for the homepage or for the corresponding video page
+  const [currentVideo, setCurrentVideo] = useState(defaultVideo || null);// Either use it for the homepage (defaultVideo) or for the corresponding video page (null, so it is open to any video)
 
   useEffect(() => {
     const fetchVideoDetails = async () => {
@@ -41,6 +41,7 @@ function Video({ videoList, api, defaultVideo }) {
   };
 
   // Filter out the current video from the list ---------------------------------
+  // This variable will be inserted in the List component
   const filteredVideoList = videoList.filter(video => video.id !== currentVideo?.id);
 
   return (

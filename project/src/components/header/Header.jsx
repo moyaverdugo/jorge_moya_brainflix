@@ -3,7 +3,7 @@ import logo from '../../assets/logo/BrainFlix-logo.svg';
 import photo from '../../assets/images/Mohan-muruge.jpg';
 import uploadIcon from '../../assets/icons/upload.svg';
 import searchIcon from '../../assets/icons/search.svg';
-import './header.css';
+import './header.scss';
 
 const Header = ({ onResetVideo }) => {
 

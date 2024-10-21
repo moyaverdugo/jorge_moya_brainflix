@@ -1,6 +1,6 @@
 import viewsIcon from '../../assets/icons/views.svg';
 import likesIcon from '../../assets/icons/likes.svg';
-import './information.css';
+import './information.scss';
 
 const Information = ({ title, channel, date, description, views, likes }) => {
 
