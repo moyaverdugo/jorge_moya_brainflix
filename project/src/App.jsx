@@ -7,6 +7,8 @@ import axios from 'axios';
 import './styles/global.scss';
 
 // Class to manage the API -----------------------------------------------------------------------------------
+// I could have put this in a separate json file. But i didnt know whether is easier to have everything inside the
+// same component file or having it on a separate file.
 class ClassApi {
   constructor(apiKey) {
     this.apiKey = apiKey;
@@ -35,7 +37,7 @@ class ClassApi {
 
   async postComment(videoId, commentText) {
     try {
-      const response = await this.api.post(`/videos/${videoId}/comments`, {
+      const response = await axios.post(`https://your-api-url/videos/${videoId}/comments`, {
         comment: commentText,
       });
       return response.data; // Return the newly added comment

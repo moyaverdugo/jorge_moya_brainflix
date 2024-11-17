@@ -47,26 +47,26 @@ function Video({ videoList, api, defaultVideo }) {
   return (
     <>
       <Header onResetVideo={handleResetVideo} />
-      {currentVideo && (
-        <>
-          <Hero video={currentVideo.video} image={currentVideo.image} />
-          <div className="bottom__container">
-            <div className="left__container">
-              <Information 
-                title={currentVideo.title} 
-                channel={currentVideo.channel} 
-                date={currentVideo.timestamp} 
-                description={currentVideo.description} 
-                views={currentVideo.views} 
-                likes={currentVideo.likes} 
-              />
-              <Comments comments={currentVideo.comments} />
-            </div>
-            <div className="right__container">
-              <List videos={filteredVideoList} onVideoSelect={handleVideoSelection} />
-            </div>
-          </div>
-        </>
+      {currentVideo && (//validates that we actually have a video before rendering everything
+            <>
+              <Hero video={currentVideo.video} image={currentVideo.image} />
+              <div className="bottom__container">
+                <div className="left__container">
+                  <Information 
+                    title={currentVideo.title} 
+                    channel={currentVideo.channel} 
+                    date={currentVideo.timestamp} 
+                    description={currentVideo.description} 
+                    views={currentVideo.views} 
+                    likes={currentVideo.likes} 
+                  />
+                  <Comments comments={currentVideo.comments} api={api} videoId={videoId}/>
+                </div>
+                <div className="right__container">
+                  <List videos={filteredVideoList} onVideoSelect={handleVideoSelection} />
+                </div>
+              </div>
+            </>
       )}
     </>
   );
