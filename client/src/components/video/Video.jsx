@@ -14,16 +14,16 @@ function Video({ videoList, api, defaultVideo }) {
 
   useEffect(() => {
     const fetchVideoDetails = async () => {
-      if (api && videoId) {
-        const videoDetails = await api.getVideoDetails(videoId);
+      if (api && (videoId || defaultVideo)) {
+        const videoDetails = videoId 
+          ? await api.getVideoDetails(videoId) 
+          : defaultVideo; // If no videoId, fallback to defaultVideo
         setCurrentVideo(videoDetails);
       }
     };
-
-    if (videoId) {
-      fetchVideoDetails();
-    }
-  }, [api, videoId]);
+  
+    fetchVideoDetails();
+  }, [api, videoId, defaultVideo]);
 
   // When selecting a new video, navigate to the appropriate URL ---------------------------------
   const handleVideoSelection = (selectedVideo) => {
@@ -34,9 +34,9 @@ function Video({ videoList, api, defaultVideo }) {
   // Function to reset to the first video ---------------------------------
   const handleResetVideo = async () => {
     if (videoList.length > 0) {
-      const firstVideo = await api.getVideoDetails(videoList[0].id);
+      const firstVideo = videoList[0]; // Get the first video without making an extra API call
       setCurrentVideo(firstVideo);
-      navigate("/"); // Navigate to the home page
+      navigate(`/video/${firstVideo.id}`); // Use the id of the first video for navigation
     }
   };
 
@@ -60,7 +60,7 @@ function Video({ videoList, api, defaultVideo }) {
                     views={currentVideo.views} 
                     likes={currentVideo.likes} 
                   />
-                  <Comments comments={currentVideo.comments} api={api} videoId={videoId}/>
+                  <Comments comments={currentVideo.comments} api={api} videoId={currentVideo.id} />
                 </div>
                 <div className="right__container">
                   <List videos={filteredVideoList} onVideoSelect={handleVideoSelection} />

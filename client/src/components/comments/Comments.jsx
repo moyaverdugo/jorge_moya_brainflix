@@ -5,28 +5,34 @@ import { useState } from 'react';
 
 const Comments = ({ comments, api, videoId }) => {
     const [commentsList, setCommentsList] = useState(comments);
-    const [newComment, setNewComment] = useState(''); // State for new comment input
+    const [newComment, setNewComment] = useState('');
 
     const handleCommentSubmit = async (event) => {
-        event.preventDefault(); // Ensure the page does not refresh when submitting comment
-        const commentInput = newComment; // Get the value from state
-
-        if (commentInput) {
+        event.preventDefault();
+        const commentInput = newComment;
+    
+        if (commentInput.trim()) {
+            console.log("Posting comment for videoId:", videoId); // Ensure we have a valid videoId
             try {
-                const newCommentResponse = await api.postComment(videoId, commentInput);
-                setCommentsList([...commentsList, newCommentResponse]); // Update state with new comment
-                setNewComment(''); // Clear the input field after submission
+                const newCommentResponse = await api.postComment(videoId, {
+                    comment: commentInput,
+                    name: "Anonymous User",
+                    timestamp: Date.now()
+                });
+                setCommentsList([...commentsList, newCommentResponse]);
+                setNewComment('');
             } catch (error) {
                 console.error('Error posting comment:', error);
             }
-        }    
+        } else {
+            alert("Comment cannot be empty");
+        }
     };
     
     const handleCommentDelete = async (commentId) => {
         try {
-            await api.deleteComment(commentId); // Assuming you have this method
-            // Remove the deleted comment from the local state
-            setCommentsList(prevComments => prevComments.filter(comment => comment.id !== commentId));
+            await api.deleteComment(videoId, commentId); // Pass both videoId and commentId to the API
+            setCommentsList(prevComments => prevComments.filter(comment => comment.id !== commentId)); // Remove the comment from the local state
         } catch (error) {
             console.error('Error deleting comment:', error);
         }
@@ -51,7 +57,7 @@ const Comments = ({ comments, api, videoId }) => {
                             id="comment" 
                             placeholder="Add a new comment"
                             value={newComment}
-                            onChange={(e) => setNewComment(e.target.value)} // Control the input field
+                            onChange={(e) => setNewComment(e.target.value)} 
                         />
                     </div>
                     <button className="button__container conversation__button" type="submit">
@@ -76,5 +82,4 @@ const Comments = ({ comments, api, videoId }) => {
         </div>
     );
 };
-
 export default Comments;

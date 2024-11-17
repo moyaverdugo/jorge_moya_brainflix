@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 class ClassApi {
-  constructor(baseUrl = import.meta.env.VITE_API_BASE_URL) { // Updated here
+  constructor(baseUrl = import.meta.env.VITE_API_BASE_URL) {
     this.baseUrl = baseUrl;
+    console.log("Base URL:", this.baseUrl);
   }
 
   async getVideos() {
@@ -25,14 +26,22 @@ class ClassApi {
     }
   }
 
-  async postComment(videoId, commentText) {
+  async postComment(videoId, commentData) {
     try {
-      const response = await axios.post(`${this.baseUrl}/videos/${videoId}/comments`, {
-        comment: commentText,
-      });
+      const response = await axios.post(`${this.baseUrl}/videos/${videoId}/comments`, commentData);
       return response.data;
     } catch (error) {
       console.error('Error posting comment:', error);
+      throw error;
+    }
+  }
+
+  async deleteComment(videoId, commentId) {
+    try {
+      const response = await axios.delete(`${this.baseUrl}/videos/${videoId}/comments/${commentId}`);
+      return response.data; // { message: 'Comment deleted successfully' }
+    } catch (error) {
+      console.error('Error deleting comment:', error);
       throw error;
     }
   }

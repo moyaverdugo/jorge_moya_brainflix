@@ -46,6 +46,7 @@ function App() {
           element={<Video
             defaultVideo={defaultVideo}
             videoList={videoList}
+            api={api} // Pass the api instance
           />}
         />
         <Route
@@ -57,6 +58,7 @@ function App() {
           element={<Video
                      videoList={videoList}
                      api={api} />}  // Pass api instance for video details
+                     defaultVideo={defaultVideo}
         />
         <Route
           path="*"

@@ -77,10 +77,10 @@ router.post('/', (req, res) => {
     id: uuidv4(),
     title: req.body.title || "Untitled Video",
     description: req.body.description || "No description available.",
-    channel: "Your Channel Name", // Can be set as needed
-    image: "http://localhost:5000/images/Upload-video-preview.jpg", // Path to the default thumbnail image
-    views: "0", // Default view count
-    likes: "0", // Default like count
+    channel: "Your Channel Name", 
+    image: "http://localhost:5000/images/Upload-video-preview.jpg", 
+    views: "0", 
+    likes: "0", 
     comments: [], // Empty comments array
     timestamp: Date.now(),
   };
@@ -88,6 +88,30 @@ router.post('/', (req, res) => {
   videos.push(newVideo);
   saveVideosData(videos);
   res.status(201).json(newVideo);
+});
+
+// Route to delete a comment for a specific video
+router.delete('/:videoId/comments/:commentId', (req, res) => {
+  const videos = getVideosData();
+  const video = videos.find((v) => v.id === req.params.videoId);
+
+  if (!video) {
+    return res.status(404).json({ message: 'Video not found' });
+  }
+
+  const commentIndex = video.comments.findIndex(
+    (comment) => comment.id === req.params.commentId
+  );
+
+  if (commentIndex === -1) {
+    return res.status(404).json({ message: 'Comment not found' });
+  }
+
+  // Remove the comment from the video
+  video.comments.splice(commentIndex, 1);
+  saveVideosData(videos);
+
+  res.status(200).json({ message: 'Comment deleted successfully' });
 });
 
 export default router;
